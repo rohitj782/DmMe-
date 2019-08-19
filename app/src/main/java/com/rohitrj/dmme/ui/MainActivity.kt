@@ -1,9 +1,9 @@
-package com.rohitrj.dmme
+package com.rohitrj.dmme.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
-
+import com.rohitrj.dmme.R
 
 
 class MainActivity : AppCompatActivity() {
