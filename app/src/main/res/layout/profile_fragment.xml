@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.home.profile.ProfileFragment">
+
+
+    <Button
+            android:text="SignOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonSignOut" android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"/>
+    <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp" tools:src="@tools:sample/avatars[0]"
+            android:id="@+id/imageViewProfilePic" android:layout_marginTop="32dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            app:srcCompat="@drawable/profile"/>
+    <TextView
+            android:text="Change profile pic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewChangeProfile"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewProfilePic" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" android:layout_marginTop="16dp" android:textColor="@color/colorAccent"
+            android:textSize="14sp" android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

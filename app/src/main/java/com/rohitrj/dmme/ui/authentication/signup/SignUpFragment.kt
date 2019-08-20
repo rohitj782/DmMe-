@@ -7,10 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import com.google.firebase.database.*
 
 import com.rohitrj.dmme.R
 import com.rohitrj.dmme.data.User
+import com.rohitrj.dmme.ui.authentication.IsLoggedIn
 import kotlinx.android.synthetic.main.sign_up_fragment.*
 
 const val TAG = "signUpFragment"
@@ -36,12 +38,12 @@ class SignUpFragment : Fragment() {
         // TODO: Use the ViewModel
 
         buttonSignUp.setOnClickListener {
-            proceedSignIn()
+            proceedSignIn(it)
         }
 
     }
 
-    private fun proceedSignIn() {
+    private fun proceedSignIn(view: View) {
 
         val email: String
         val password: String
@@ -93,12 +95,14 @@ class SignUpFragment : Fragment() {
 
                     val databaseReference: DatabaseReference = FirebaseDatabase.getInstance()
                         .reference.child("users").child("auth")
-                    val user = User(name, email, password)
+                    val user = User(name, email, password,null)
                     databaseReference.push().setValue(user).addOnCompleteListener {
                         if (it.isSuccessful) {
+                            context?.let { it1 -> IsLoggedIn().loginUser(email, it1) }
                             Log.i(TAG, "SignUp success")
                             progressBarSignUp.visibility = View.INVISIBLE
                             buttonSignUp.isEnabled = true
+                            Navigation.findNavController(view).navigate(SignUpFragmentDirections.openHome())
                         } else {
                             Log.i(TAG, "SignUp failed")
                             progressBarSignUp.visibility = View.INVISIBLE
@@ -114,8 +118,5 @@ class SignUpFragment : Fragment() {
                 buttonSignUp.isEnabled = true
             }
         })
-
-
     }
-
 }

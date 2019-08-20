@@ -13,7 +13,9 @@ import com.google.firebase.database.*
 
 import com.rohitrj.dmme.R
 import com.rohitrj.dmme.data.User
+import com.rohitrj.dmme.ui.authentication.IsLoggedIn
 import com.rohitrj.dmme.ui.authentication.signup.TAG
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.sign_in_fragment.*
 import kotlinx.android.synthetic.main.sign_up_fragment.*
 
@@ -33,16 +35,18 @@ class SignInFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(SignInViewModel::class.java)
         // TODO: Use the ViewModel
 
+        activity!!.bottomNavigation.visibility = View.GONE
+
         textViewSignUp.setOnClickListener {
             openSignUp(it)
         }
 
         buttonSignIn.setOnClickListener {
-            proceedSignIn()
+            proceedSignIn(it)
         }
     }
 
-    private fun proceedSignIn() {
+    private fun proceedSignIn(view: View) {
 
 
         val email: String
@@ -77,15 +81,15 @@ class SignInFragment : Fragment() {
             override fun onDataChange(p0: DataSnapshot) {
                 if (p0.exists()) {
                     var user = User()
-                    for(dataSnapshot:DataSnapshot in p0.children)
+                    for (dataSnapshot: DataSnapshot in p0.children)
                         user = dataSnapshot.getValue(User::class.java)!!
-                    if (password.equals(user.password)){
-
-                        //todo proceed login
-
+                    if (password.equals(user.password)) {
+                        context?.let { it1 -> IsLoggedIn().loginUser(email, it1) }
                         progressBarSignIn.visibility = View.INVISIBLE
                         buttonSignIn.isEnabled = true
-                    }else{
+                        Navigation.findNavController(view).
+                            navigate(SignInFragmentDirections.openHome())
+                    } else {
                         editTextPassword.error = "Incorrect password."
                         editTextPassword.requestFocus()
                         progressBarSignIn.visibility = View.INVISIBLE
@@ -109,7 +113,7 @@ class SignInFragment : Fragment() {
         })
     }
 
-    private fun openSignUp(view:View) {
+    private fun openSignUp(view: View) {
         Navigation.findNavController(view).navigate(SignInFragmentDirections.openSignUp())
     }
 

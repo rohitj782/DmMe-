@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 
 import com.rohitrj.dmme.R
+import com.rohitrj.dmme.ui.authentication.IsLoggedIn
 import com.rohitrj.dmme.ui.base.BaseFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -38,6 +39,7 @@ class SplashFragment : BaseFragment() {
             //check for authentication
             if(isLoggedIn()){
                 //open home
+                Navigation.findNavController(view).navigate(SplashFragmentDirections.openHome())
             }else{
                 //open sign in screen
                 Navigation.findNavController(view).navigate(SplashFragmentDirections.openSignIn())
@@ -46,7 +48,7 @@ class SplashFragment : BaseFragment() {
     }
 
     private fun isLoggedIn(): Boolean {
-        return false
+        return IsLoggedIn().isLoggedIn(context!!)
     }
 
 }

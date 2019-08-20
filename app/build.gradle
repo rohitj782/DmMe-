@@ -54,4 +54,19 @@ dependencies {
 
     //material design
     implementation 'com.google.android.material:material:1.1.0-alpha09'
+
+    // FirebaseUI for Cloud Storage
+    implementation 'com.firebaseui:firebase-ui-storage:5.0.0'
+
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    kapt 'com.github.bumptech.glide:compiler:4.8.0'
+
+    //groupie
+    implementation 'com.xwray:groupie:2.3.0'
+    implementation 'com.xwray:groupie-kotlin-android-extensions:2.3.0'
+
+    //firebase messaging
+    implementation 'com.google.firebase:firebase-messaging:20.0.0'
+
 }
